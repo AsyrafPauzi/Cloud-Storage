@@ -8,12 +8,26 @@
   </div>
 <% end %>
 
-<div class="well">
-  <%= form_for @file, html: { multipart: true } do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.label :attachment %>
-    <%= f.file_field :attachment %>
-    <%= f.submit "Save", class: "btn btn-primary" %>
-  <% end %>
-</div>
+
+   <body class="c-login-wrapper">
+        <div class="c-login">
+            <header class="c-login__head">
+              <center>
+                <h2>
+                  Upload Files
+                </h2>
+              </center>
+            </header>
+            <div class="c-login__content">
+            <%= form_for @file, html: { multipart: true } do |f| %>
+              <%= f.label :name, class: 'c-field__label' %>
+              <%= f.text_field :name, class: 'c-input'  %>
+              <%= f.label :attachment, class: 'c-field__label' %>
+              <%= f.file_field :attachment, class: 'c-input'  %>
+              <%= f.submit "Upload", class: "c-btn c-btn--info c-btn--fullwidth" %>
+            <% end %>
+            </div>
+        </div>
+    </body>
+
+

@@ -1,24 +1,36 @@
 <% if admin_signed_in? %> 
  <h1> You are ADMIN.</h1>
 <% else %>
-<div class="jumbotron">
-  <h1>Lorem Ipsum</h1>
-  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
- 
-</div>
-
-<div class="row">
-  <div class="col-md-4">
-    <h2>Lorem Ipsum</h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-  </div>
-  <div class="col-md-4">
-    <h2>Lorem Ipsum</h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-  </div>
-  <div class="col-md-4">
-    <h2>Lorem Ipsum</h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-  </div>
-</div>
 <%end %>
+
+   <body class="c-login-wrapper">
+        <div class="c-login">
+            <header class="c-login__head">
+                <a class="c-login__brand" href="login.html#!">
+                    <%= image_tag "logo-login.svg" %>
+                </a>
+                <h1 class="c-login__title">Welcome back! Please login.</h1>
+            </header>
+            
+            <form class="c-login__content">
+                <div class="c-field u-mb-small">
+                    <label class="c-field__label" for="input1">Sign in with your e-mail address</label> 
+                    <input class="c-input" type="email" id="input1" placeholder="clark@dashboard.com"> 
+                </div>
+
+                <div class="c-field u-mb-small">
+                    <label class="c-field__label" for="input2">Password</label> 
+                    <input class="c-input" type="password" id="input2" placeholder="Numbers, Letters..."> 
+                </div>
+
+                <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Sign in to Dashboard</button>
+
+            </form>
+
+            <footer class="c-login__footer">
+              <center>
+                Don’t have an account yet? <%= link_to "Get Started", new_user_registration_path %>
+              </center>
+            </footer>
+        </div>
+    </body>
