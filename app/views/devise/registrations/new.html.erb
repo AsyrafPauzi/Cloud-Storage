@@ -1,29 +1,33 @@
-<h2>Sign up</h2>
+ <body class="c-login-wrapper">
+        <div class="c-login">
+            <header class="c-login__head">
+                <a class="c-login__brand" href="login.html#!">
+                    <%= image_tag "logo-login.svg" %>
+                </a>
+                <h1 class="c-login__title">Sign Up Today.</h1>
+            </header>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => 'c-login__content'}) do |f| %>
+                <div class="c-field u-mb-small">
+                    <label class="c-field__label" for="input1">Sign in with your e-mail address</label> 
+                    <%= f.email_field :email, autofocus: true, class: 'c-input' %>
+                </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+                <div class="c-field u-mb-small">
+                    <label class="c-field__label" for="input2">Password</label> 
+                    <%= f.password_field :password, autocomplete: "off", class: 'c-input' %>
+                </div>
+                <div class="c-field u-mb-small">
+                    <label class="c-field__label" for="input2">Password Confirmation</label> 
+                    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'c-input' %>
+                </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+                <%= f.submit "Sign up", class: 'c-btn c-btn--info c-btn--fullwidth' %>
+              <% end %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+            <footer class="c-login__footer">
+              <center>
+                Already have an account yet? <%= link_to "sign in", new_user_session_path %>
+              </center>
+            </footer>
+        </div>
+    </body>
