@@ -14,7 +14,7 @@ class StoragesController < ApplicationController
   		@file = Storage.new(file_params)
   		if @file.save
   			@user = @file.update(user_id: current_user.id)
-  			redirect_to storages_path, notice: "The file #{@file.name} has been uploaded."
+  			redirect_to root_path, notice: "The file #{@file.name} has been uploaded."
   		else
   			render "new"
   		end
@@ -23,7 +23,7 @@ class StoragesController < ApplicationController
   	def destroy
 	    @file = Storage.find(params[:id])
 	    @file.destroy
-	    redirect_to storages_path, notice:  "The file #{@file.name} has been deleted."
+	    redirect_to root_path, notice:  "The file #{@file.name} has been deleted."
 	end
 
 	def download

@@ -1,15 +1,23 @@
 class Devise::SessionsController < DeviseController
-  prepend_before_action :require_no_authentication, only: [:new, :create]
+  prepend_before_action :require_no_authentication, only: [:cancel]
   prepend_before_action :allow_params_authentication!, only: :create
   prepend_before_action :verify_signed_out_user, only: :destroy
   prepend_before_action only: [:create, :destroy] { request.env["devise.skip_timeout"] = true }
 
   # GET /resource/sign_in
   def new
-    self.resource = resource_class.new(sign_in_params)
-    clean_up_passwords(resource)
-    yield resource if block_given?
-    respond_with(resource, serialize_options(resource))
+    if current_user
+      @files = Storage.where(user_id: current_user.id).all
+      self.resource = resource_class.new(sign_in_params)
+      clean_up_passwords(resource)
+      yield resource if block_given?
+      respond_with(resource, serialize_options(resource))
+    else
+      self.resource = resource_class.new(sign_in_params)
+      clean_up_passwords(resource)
+      yield resource if block_given?
+      respond_with(resource, serialize_options(resource))
+    end
   end
 
   # POST /resource/sign_in
@@ -68,6 +76,9 @@ class Devise::SessionsController < DeviseController
     users = Devise.mappings.keys.map { |s| warden.user(scope: s, run_callbacks: false) }
 
     users.all?(&:blank?)
+  end
+
+  def cancel
   end
 
   def respond_to_on_destroy

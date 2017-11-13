@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   end
   devise_for :admins
   devise_for :users
-  root 'welcome#index'
+  devise_scope :user do
+    root :to => 'devise/sessions#new'
+  end
   resources 'mains', :only => 'index'
   resources 'admins', :only => 'index'
 
