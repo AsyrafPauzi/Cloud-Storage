@@ -1,3 +1,12 @@
+<% if current_user.authy_enabled == false %>
+         
+<div class="jumbotron">
+  <H1><a class="button2" <%= link_to "Verify Number First",user_enable_authy_path , class: "buttton2" , onClick:"window.location.reload()" %></a><h1>
+  
+  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+
+<% else %>
+
 <% if !@file.errors.empty? %>
   <div class="alert alert-error">
     <ul>
@@ -29,5 +38,5 @@
             </div>
         </div>
     </body>
-
-
+    
+<% end %>

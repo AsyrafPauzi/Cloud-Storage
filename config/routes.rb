@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :storages do 
     member do 
       get :download
@@ -9,8 +10,14 @@ Rails.application.routes.draw do
   devise_scope :user do
     root :to => 'devise/sessions#new'
   end
-  resources 'mains', :only => 'index'
-  resources 'admins', :only => 'index'
+devise_scope :admin do
+    root :to => 'admins/sessions#new'
+  end
 
- 
+  
+  get '/admins', to: 'admins#index'
+
+  resources :manages
+
+  
 end

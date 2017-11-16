@@ -5,7 +5,11 @@ class Devise::SessionsController < DeviseController
   prepend_before_action only: [:create, :destroy] { request.env["devise.skip_timeout"] = true }
 
   # GET /resource/sign_in
+
   def new
+
+    
+    @user = User.all
     if current_user
       @files = Storage.where(user_id: current_user.id).all
       self.resource = resource_class.new(sign_in_params)
@@ -26,7 +30,12 @@ class Devise::SessionsController < DeviseController
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
     yield resource if block_given?
+
+    if current_admin
+       respond_with resource, location: after_sign_in_path_for(resource)
+     elsif current_user
     respond_with resource, location: after_sign_in_path_for(resource)
+  end
   end
 
   # DELETE /resource/sign_out

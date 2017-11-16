@@ -1,5 +1,5 @@
 class StoragesController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user! , except: [:destroy]
 	before_action :set_file, only: [:download]
 
 	def index
@@ -28,21 +28,28 @@ class StoragesController < ApplicationController
 
 	def download
 	  #This will decrpyt the file first
+
+
+	    	  	if @file.user_id == current_user.id
 	  Carrierwave::EncrypterDecrypter::Downloader.decrypt(@file, mounted_as: :attachment)
 
 	  file_path = @file.attachment.path
+	  
 	    File.open(file_path, 'r') do |f|
 	      send_data f.read, type: MIME::Types.type_for(file_path).first.content_type,disposition: :inline,:filename => File.basename(file_path)
 	  end
 	    #This is to remove the decrypted file after transfer
 	    File.unlink(file_path)
 	end
+end
 
 
   	private
 	  	def set_file
+
 	      @file = Storage.find(params[:id])
 	    end
+	    
 		  def file_params
 		    params.require(:storage).permit(:name, :attachment)
 		  end

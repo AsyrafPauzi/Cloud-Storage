@@ -22,6 +22,8 @@ class DeviseController < Devise.parent_controller.constantize
   #
   # This method should be public as it is is in ActionPack
   # itself. Changing its visibility may break other gems.
+ 
+  
   def _prefixes #:nodoc:
     @_prefixes ||= if self.class.scoped_views? && request && devise_mapping
       ["#{devise_mapping.scoped_path}/#{controller_name}"] + super
